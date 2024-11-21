@@ -22,8 +22,10 @@ public class PatientCase {
     private String sex;
     private int age;
     private String symptoms;
-    private int priority;
-    private String specialty;
+
+    private Integer priority = null; 
+
+    private String specialty = null; 
 
     @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference  // Avoid infinite recursion, this is the "parent" side of the relationship
@@ -81,13 +83,14 @@ public class PatientCase {
         this.symptoms = symptoms;
     }
 
-    public int getPriority() {
+    public Integer getPriority() {
         return priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(Integer priority) {
         this.priority = priority;
     }
+
 
     public String getSpecialty() {
         return specialty;
