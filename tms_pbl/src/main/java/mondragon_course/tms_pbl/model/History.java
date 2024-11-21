@@ -1,6 +1,5 @@
 package mondragon_course.tms_pbl.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +18,7 @@ public class History {
 
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
-    private PatientCase caseEntity;
+    private PatientCase patientcaseEntity;
 
     // Getters and Setters
     public Long getId() {
@@ -46,12 +45,11 @@ public class History {
         this.completeFlag = completeFlag;
     }
 
-    public PatientCase getCaseEntity() {
-        return caseEntity;
+    public PatientCase getPatientCaseEntity() {
+        return patientcaseEntity;
     }
 
-    public void setCaseEntity(PatientCase caseEntity) {
-        this.caseEntity = caseEntity;
+    public void setPatientCaseEntity(PatientCase patientcaseEntity) {
+        this.patientcaseEntity = patientcaseEntity;
     }
 }
-

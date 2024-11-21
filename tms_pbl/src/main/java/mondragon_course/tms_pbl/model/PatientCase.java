@@ -1,5 +1,7 @@
 package mondragon_course.tms_pbl.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;  // Import Jackson annotation
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -24,11 +26,13 @@ public class PatientCase {
     private String specialty;
 
     @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference  // Avoid infinite recursion, this is the "parent" side of the relationship
     private List<Queue> queues;
 
-    @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "patientcaseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> histories;
 
+    // Getters and setters
     public Long getCaseId() {
         return caseId;
     }
