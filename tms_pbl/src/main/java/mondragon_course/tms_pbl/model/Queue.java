@@ -20,7 +20,7 @@ public class Queue {
 
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
-    private Case caseEntity;
+    private PatientCase caseEntity;
 
     
     public Long getId() {
@@ -39,11 +39,11 @@ public class Queue {
         this.timeEnter = timeEnter;
     }
 
-    public Case getCaseEntity() {
+    public PatientCase getCaseEntity() {
         return caseEntity;
     }
 
-    public void setCaseEntity(Case caseEntity) {
+    public void setCaseEntity(PatientCase caseEntity) {
         this.caseEntity = caseEntity;
     }
 }

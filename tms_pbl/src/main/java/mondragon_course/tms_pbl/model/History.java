@@ -19,7 +19,7 @@ public class History {
 
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
-    private Case caseEntity;
+    private PatientCase caseEntity;
 
     // Getters and Setters
     public Long getId() {
@@ -46,11 +46,11 @@ public class History {
         this.completeFlag = completeFlag;
     }
 
-    public Case getCaseEntity() {
+    public PatientCase getCaseEntity() {
         return caseEntity;
     }
 
-    public void setCaseEntity(Case caseEntity) {
+    public void setCaseEntity(PatientCase caseEntity) {
         this.caseEntity = caseEntity;
     }
 }
