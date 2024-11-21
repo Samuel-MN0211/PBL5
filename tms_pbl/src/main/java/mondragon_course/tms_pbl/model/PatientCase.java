@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Case {
+public class PatientCase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long caseId;
