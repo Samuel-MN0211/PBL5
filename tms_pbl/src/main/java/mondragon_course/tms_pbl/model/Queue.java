@@ -3,6 +3,8 @@ package mondragon_course.tms_pbl.model;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;  // Import Jackson annotation
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Queue {
     @Id
@@ -21,7 +24,7 @@ public class Queue {
 
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
-    @JsonBackReference  // Avoid infinite recursion, this is the "child" side of the relationship
+    // @JsonBackReference  // Avoid infinite recursion, this is the "child" side of the relationship
     private PatientCase caseEntity;
 
     public Long getId() {
