@@ -33,21 +33,21 @@ public class HistoryController {
     }
     
 
-    // @GetMapping(value = "/patientsPerSpecialty", produces = { "application/json", "application/xml" })
-    // @ResponseBody
-    // public ResponseEntity<List<History>> getPatientsPerSpecialty() {
+    @GetMapping(value = "/patientsPerSpecialty", produces = { "application/json", "application/xml" })
+    @ResponseBody
+    public ResponseEntity<List<Object[]>> getPatientsPerSpecialty() {
 
-    //     List<History> list = repo.findAll();
+        List<Object[]> list = repo.getPatientQuantityPerSpecialty();
 
-    //     if (list.isEmpty()) {
-    //         return ResponseEntity.notFound().build();
-    //     } else {
-    //         return new ResponseEntity<>(list, HttpStatus.OK);
-    //     }
-    // }
+        if (list.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
 
     /*
-     * /patientsPerSpecialty
+     * 
      * /priorityDistribution
      * /AvgTimeWait
      * /AvgTimeWaitPerSpecialty
