@@ -15,5 +15,13 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
         "GROUP BY pc.specialty")
     public List<Object[]> getPatientQuantityPerSpecialty();
 
+    @Query("SELECT pc.priority AS priority, COUNT(h) AS quantity " +
+        "FROM History h " +
+        "JOIN h.patientcaseEntity pc " +
+        "GROUP BY pc.priority " +
+        "ORDER BY pc.priority DESC")
+    public List<Object[]> getPriorityDistribution();
+
+    // "JOIN patientCase pc ON h.case_id = pc.caseId" +
 
 }

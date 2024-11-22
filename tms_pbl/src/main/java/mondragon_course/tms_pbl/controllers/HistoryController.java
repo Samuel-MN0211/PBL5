@@ -46,6 +46,20 @@ public class HistoryController {
         }
     }
 
+    @GetMapping(value = "/priorityDistribution", produces = { "application/json", "application/xml" })
+    @ResponseBody
+    public ResponseEntity<List<Object[]>> getPriority() {
+
+        List<Object[]> list = repo.getPriorityDistribution();
+
+        if (list.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
     /*
      * 
      * /priorityDistribution
