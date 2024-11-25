@@ -21,7 +21,7 @@ public class Queue {
 
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
-    @JsonBackReference  // Avoid infinite recursion, this is the "child" side of the relationship
+    @JsonBackReference  
     private PatientCase caseEntity;
 
     public Long getId() {

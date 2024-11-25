@@ -1,8 +1,8 @@
 package mondragon_course.tms_pbl.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;  // Import Jackson annotation
+import java.util.List;  // Import Jackson annotation
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,18 +23,18 @@ public class PatientCase {
     private int age;
     private String symptoms;
 
-    private Integer priority = null; 
+    private Float priority = null; 
 
     private String specialty = null; 
 
     @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference  // Avoid infinite recursion, this is the "parent" side of the relationship
+    @JsonManagedReference 
     private List<Queue> queues;
 
     @OneToMany(mappedBy = "patientcaseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> histories;
 
-    // Getters and setters
+
     public Long getCaseId() {
         return caseId;
     }
@@ -83,11 +83,11 @@ public class PatientCase {
         this.symptoms = symptoms;
     }
 
-    public Integer getPriority() {
+    public Float getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(Float priority) {
         this.priority = priority;
     }
 
