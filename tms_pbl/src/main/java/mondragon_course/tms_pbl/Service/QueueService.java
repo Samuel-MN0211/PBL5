@@ -13,50 +13,6 @@ import mondragon_course.tms_pbl.model.Queue;
 import mondragon_course.tms_pbl.repositories.PatientCaseRepository;
 import mondragon_course.tms_pbl.repositories.QueueRepository;
 
-// @Service
-// public class QueueService {
-//     @Autowired
-//     private QueueRepository queueRepository;
-
-//     @Autowired
-//     private PatientCaseRepository patientCaseRepository;
-
-    
-
-//     public void updateQueues(PatientCase patientCase) {
-//         // Verificar si la prioridad y la especialidad no son nulas
-//         if (patientCase.getPriority() != null && patientCase.getSpecialty() != null) {
-//             // Crear una nueva entrada en la cola
-//             Queue newQueueEntry = new Queue();
-//             newQueueEntry.setCaseEntity(patientCase);
-//             newQueueEntry.setTimeEnter(LocalDateTime.now());
-
-//             // Guardar en la base de datos
-//             queueRepository.save(newQueueEntry);
-//         }
-//     }
-
-//     public List<Queue> getAllQueues() {
-//         return queueRepository.findAll();
-//     }
-
-//     public List<Queue> getQueuesBySpecialty(String specialty) {
-//         return queueRepository.findByCaseEntity_SpecialtyOrderByCaseEntity_PriorityDesc(specialty);
-//     }
-
-// //     public List<QueueResponseDTO> getAllQueuesWithDetails() {
-// //     List<Queue> queues = queueRepository.findAll();
-// //     return queues.stream()
-// //         .map(queue -> new QueueResponseDTO(
-// //             queue.getId(),
-// //             queue.getCaseEntity().getCaseId(),
-// //             queue.getCaseEntity().getPriority(),
-// //             queue.getCaseEntity().getSpecialty()
-// //         ))
-// //         .collect(Collectors.toList());
-// // }
-// }
-
 @Service
 public class QueueService {
 

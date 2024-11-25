@@ -1,7 +1,10 @@
 package mondragon_course.tms_pbl.controllers;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -112,12 +115,29 @@ public class QueueController {
      * Muestra todas las colas existentes.
      */
     @GetMapping(value = "/show", produces = "application/json")
-    public ResponseEntity<List<Queue>> getAllQueues() {
+    public ResponseEntity<List<Map<String, Object>>> getAllQueues() {
         List<Queue> queues = queueService.getAllQueues();
+
         if (queues.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return new ResponseEntity<>(queues, HttpStatus.OK);
+
+        // Filtrar datos y construir respuesta personalizada
+        List<Map<String, Object>> response = queues.stream().map(queue -> {
+            Map<String, Object> queueData = new HashMap<>();
+            queueData.put("id", queue.getId());
+            queueData.put("specialty", queue.getSpecialty());
+            queueData.put("patientCases", queue.getPatientCases().stream().map(patient -> {
+                Map<String, Object> patientData = new HashMap<>();
+                patientData.put("name", patient.getName());
+                patientData.put("priority", patient.getPriority());
+                patientData.put("timeEnter", queue.getTimeEnter()); // Reutilizamos el tiempo de entrada de la cola
+                return patientData;
+            }).collect(Collectors.toList()));
+            return queueData;
+        }).collect(Collectors.toList());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/process-patients")

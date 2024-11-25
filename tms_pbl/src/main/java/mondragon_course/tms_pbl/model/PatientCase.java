@@ -110,15 +110,7 @@ public class PatientCase {
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
     }
-
-    // public List<Queue> getQueues() {
-    //     return queues;
-    // }
-
-    // public void setQueues(List<Queue> queues) {
-    //     this.queues = queues;
-    // }
-
+    
     public List<History> getHistories() {
         return histories;
     }
