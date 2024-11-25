@@ -32,6 +32,9 @@ public class PatientCaseController {
     private QueueRepository queueRepository;
 
 
+
+
+
     @GetMapping("/queue")
     public ResponseEntity<?> getQueueDetails(@RequestParam int caseId) {
         Optional<PatientCase> patientCaseOpt = patientCaseRepository.findById(caseId);
