@@ -20,7 +20,7 @@ public class History {
     @JoinColumn(name = "case_id", nullable = false)
     private PatientCase patientcaseEntity;
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
