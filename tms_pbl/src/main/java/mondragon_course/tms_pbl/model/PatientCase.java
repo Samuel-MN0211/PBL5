@@ -1,9 +1,12 @@
 package mondragon_course.tms_pbl.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;  // Import Jackson annotation
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;  
+import java.util.List;  
+
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -26,9 +29,13 @@ public class PatientCase {
     private int age;
     private String symptoms;
 
+
+
+
     private Float priority = null; 
 
     private String specialty = null; 
+
 
     @ManyToOne
     @JoinColumn(name = "queue_id") // Relación con la cola
@@ -45,7 +52,7 @@ public class PatientCase {
     @OneToMany(mappedBy = "patientcaseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<History> histories;
 
-    // Getters and setters
+
     public Long getCaseId() {
         return caseId;
     }
@@ -93,6 +100,7 @@ public class PatientCase {
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
     }
+
 
     public Float getPriority() {
         return priority;

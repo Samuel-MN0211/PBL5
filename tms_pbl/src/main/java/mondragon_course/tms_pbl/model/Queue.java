@@ -34,7 +34,13 @@ public class Queue {
     // Campo adicional para registrar el tiempo de entrada de un paciente.
     private LocalDateTime timeEnter;
 
+
     private String specialty;
+    @ManyToOne
+    @JoinColumn(name = "case_id", nullable = false)
+    @JsonBackReference  
+    private PatientCase caseEntity;
+
 
     // Getters y setters
     public Long getId() {
