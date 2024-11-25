@@ -1,16 +1,19 @@
 package mondragon_course.tms_pbl.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;  // Import Jackson annotation
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo; 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;  
+import java.util.List;  
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "caseId")
@@ -26,19 +29,36 @@ public class PatientCase {
     private int age;
     private String symptoms;
 
-    private Integer priority = null; 
+
+
+
+    private Float priority = null; 
 
     private String specialty = null; 
+
 
     @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonManagedReference  // Avoid infinite recursion, this is the "parent" side of the relationship
     private List<Queue> queues;
 
+
+    @ManyToOne
+    @JoinColumn(name = "queue_id") // Relación con la cola
+    @JsonBackReference
+    private Queue queue;
+    // Getter y Setter
+    public Queue getQueue() {
+        return queue;
+    }
+
+    public void setQueue(Queue queue) {
+        this.queue = queue;
+    }
     @OneToMany(mappedBy = "patientcaseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     // @JsonManagedReference
     private List<History> histories;
 
-    // Getters and setters
+
     public Long getCaseId() {
         return caseId;
     }
@@ -87,11 +107,12 @@ public class PatientCase {
         this.symptoms = symptoms;
     }
 
-    public Integer getPriority() {
+
+    public Float getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(Float priority) {
         this.priority = priority;
     }
 
@@ -104,13 +125,13 @@ public class PatientCase {
         this.specialty = specialty;
     }
 
-    public List<Queue> getQueues() {
-        return queues;
-    }
+    // public List<Queue> getQueues() {
+    //     return queues;
+    // }
 
-    public void setQueues(List<Queue> queues) {
-        this.queues = queues;
-    }
+    // public void setQueues(List<Queue> queues) {
+    //     this.queues = queues;
+    // }
 
     public List<History> getHistories() {
         return histories;
