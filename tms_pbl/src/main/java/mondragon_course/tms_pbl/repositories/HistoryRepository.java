@@ -21,7 +21,20 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
         "GROUP BY pc.priority " +
         "ORDER BY pc.priority DESC")
     public List<Object[]> getPriorityDistribution();
+    
+    @Query("SELECT AVG(h.totalTime) AS time " +
+        "FROM History h")
+    public Object[] getAvgTime();
 
-    // "JOIN patientCase pc ON h.case_id = pc.caseId" +
+
+    @Query("SELECT pc.specialty, AVG(totalTime) AS avg_t_spec " +
+        "FROM History h JOIN h.patientcaseEntity pc " +
+        "GROUP BY pc.specialty ORDER BY pc.specialty")
+    public List<Object[]> getAvgTimePerSpecialty();
+    
+    @Query("SELECT pc.priority, AVG(totalTime) AS avg_t_prior " +
+        "FROM History h JOIN h.patientcaseEntity pc " +
+        "GROUP BY pc.priority ORDER BY pc.priority")
+    public List<Object[]> getAvgTimePerPriority();
 
 }

@@ -60,10 +60,50 @@ public class HistoryController {
         }
     }
 
+    @GetMapping(value = "/avgTimeTotal", produces = { "application/json", "application/xml" })
+    @ResponseBody
+    public ResponseEntity<Object> getTotalTimeAvg() {
+
+        Object timeAvg = repo.getAvgTime();
+
+        if (timeAvg == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(timeAvg, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/avgTimePriority", produces = { "application/json", "application/xml" })
+    @ResponseBody
+    public ResponseEntity<List<Object[]>> getPriorityTimeAvg() {
+
+        List<Object[]> list = repo.getAvgTimePerPriority();
+
+        if (list.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping(value = "/avgTimeSpecialty", produces = { "application/json", "application/xml" })
+    @ResponseBody
+    public ResponseEntity<List<Object[]>> getSpecialtyTimeAvg() {
+        
+        List<Object[]> list = repo.getAvgTimePerSpecialty();
+
+        if (list.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        }
+    }
+
+
     /*
      * 
-     * /priorityDistribution
-     * /AvgTimeWait
+     * 
      * /AvgTimeWaitPerSpecialty
      * /AvgTimeWaitPerPriority
      */
