@@ -23,6 +23,7 @@ public class PatientCase {
     private int age;
     private String symptoms;
 
+
     private Float priority = null; 
 
     private String specialty = null; 
@@ -83,11 +84,13 @@ public class PatientCase {
         this.symptoms = symptoms;
     }
 
+
     public Float getPriority() {
         return priority;
     }
 
     public void setPriority(Float priority) {
+
         this.priority = priority;
     }
 

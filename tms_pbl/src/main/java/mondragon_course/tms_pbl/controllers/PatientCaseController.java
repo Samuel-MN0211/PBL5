@@ -49,6 +49,7 @@ public class PatientCaseController {
         Queue queue = queues.get(0); 
         long remainingTime = Duration.between(LocalDateTime.now(), queue.getTimeEnter()).toMinutes();
         int position = queueRepository.findPositionByCaseId(caseId); 
+
         Float priority = patientCaseOpt.get().getPriority();
 
         return ResponseEntity.ok(
