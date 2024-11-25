@@ -30,30 +30,30 @@ public class PatientCaseController {
     private QueueRepository queueRepository;
 
 
-    @GetMapping("/queue")
-    public ResponseEntity<?> getQueueDetails(@RequestParam int caseId) {
-        Optional<PatientCase> patientCaseOpt = patientCaseRepository.findById(caseId);
+    // @GetMapping("/queue")
+    // public ResponseEntity<?> getQueueDetails(@RequestParam int caseId) {
+    //     Optional<PatientCase> patientCaseOpt = patientCaseRepository.findById(caseId);
 
-        if (patientCaseOpt.isEmpty()) {
-            return ResponseEntity.badRequest().body("Case not found.");
-        }
+    //     if (patientCaseOpt.isEmpty()) {
+    //         return ResponseEntity.badRequest().body("Case not found.");
+    //     }
 
-        List<Queue> queues = patientCaseOpt.get().getQueues();
+    //     List<Queue> queues = patientCaseOpt.get().getQueues();
 
-        if (queues.isEmpty()) {
-            return ResponseEntity.ok("No queues associated with this case.");
-        }
+    //     if (queues.isEmpty()) {
+    //         return ResponseEntity.ok("No queues associated with this case.");
+    //     }
 
-        Queue queue = queues.get(0); 
-        long remainingTime = Duration.between(LocalDateTime.now(), queue.getTimeEnter()).toMinutes();
-        int position = queueRepository.findPositionByCaseId(caseId); 
-        int priority = patientCaseOpt.get().getPriority();
+    //     Queue queue = queues.get(0); 
+    //     long remainingTime = Duration.between(LocalDateTime.now(), queue.getTimeEnter()).toMinutes();
+    //     int position = queueRepository.findPositionByCaseId(caseId); 
+    //     int priority = patientCaseOpt.get().getPriority();
 
-        return ResponseEntity.ok(
-            String.format("Remaining time: %d minutes, Position: %d, Priority: %d",
-                    remainingTime, position, priority)
-        );
-    }
+    //     return ResponseEntity.ok(
+    //         String.format("Remaining time: %d minutes, Position: %d, Priority: %d",
+    //                 remainingTime, position, priority)
+    //     );
+    // }
 
     @PostMapping("/add")
     public ResponseEntity<?> addCase(@RequestBody PatientCase patientCase) {
