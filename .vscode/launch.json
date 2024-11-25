@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TmsPblApplication<tms_pbl>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "mondragon_course.tms_pbl.TmsPblApplication",
+            "projectName": "tms_pbl",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

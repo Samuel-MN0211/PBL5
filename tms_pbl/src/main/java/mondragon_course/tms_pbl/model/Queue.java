@@ -3,9 +3,11 @@ package mondragon_course.tms_pbl.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;  // Import Jackson annotation
+import com.fasterxml.jackson.annotation.JsonBackReference;  
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
 public class Queue {
 
@@ -36,6 +39,7 @@ public class Queue {
 
 
     private String specialty;
+  
     @ManyToOne
     @JoinColumn(name = "case_id", nullable = false)
     @JsonBackReference  

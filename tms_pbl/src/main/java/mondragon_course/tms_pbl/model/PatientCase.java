@@ -1,13 +1,12 @@
 package mondragon_course.tms_pbl.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo; 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;  
 import java.util.List;  
-
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "caseId")
 @Entity
 public class PatientCase {
     @Id
@@ -37,6 +37,11 @@ public class PatientCase {
     private String specialty = null; 
 
 
+    @OneToMany(mappedBy = "caseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonManagedReference  // Avoid infinite recursion, this is the "parent" side of the relationship
+    private List<Queue> queues;
+
+
     @ManyToOne
     @JoinColumn(name = "queue_id") // Relación con la cola
     @JsonBackReference
@@ -50,6 +55,7 @@ public class PatientCase {
         this.queue = queue;
     }
     @OneToMany(mappedBy = "patientcaseEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    // @JsonManagedReference
     private List<History> histories;
 
 
