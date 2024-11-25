@@ -27,6 +27,13 @@ public class History {
     // @JsonBackReference  //mod
     private PatientCase patientcaseEntity;
 
+    public History(long id, int totalTime, boolean completeFlag, PatientCase patientCase) {
+        this.id = id;
+        this.totalTime = totalTime;
+        this.completeFlag = completeFlag;
+        this.patientcaseEntity = patientCase;
+    }
+
     // Getters and Setters
     public Long getId() {
         return id;

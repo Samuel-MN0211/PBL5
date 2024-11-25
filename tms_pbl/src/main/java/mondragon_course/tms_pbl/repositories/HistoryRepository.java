@@ -24,7 +24,7 @@ public interface HistoryRepository extends JpaRepository<History, Integer> {
     
     @Query("SELECT AVG(h.totalTime) AS time " +
         "FROM History h")
-    public Object[] getAvgTime();
+    public Object getAvgTime();
 
 
     @Query("SELECT pc.specialty, AVG(totalTime) AS avg_t_spec " +
